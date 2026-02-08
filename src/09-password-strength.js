@@ -26,5 +26,44 @@
  * @returns {string} "weak", "medium", "strong", or "very strong"
  */
 export function checkPasswordStrength(password) {
-  // Your code here
+  const score = {
+    0: "weak",
+    1: "weak",
+    2: "medium",
+    3: "medium",
+    4: "strong",
+    5: "very strong",
+  };
+
+  let criteriaMatch = 0;
+  const capitalLettersRegex = /\p{Lu}/u;
+  const smallLettersRegex = /\p{Ll}/u;
+  const numberRegex = /[0-9]/;
+  const specialCharacterRegex = /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/;
+
+  if (password === "" || typeof password !== "string") {
+    return score[criteriaMatch];
+  }
+
+  if (password.length >= 8) {
+    criteriaMatch++;
+  }
+
+  if (capitalLettersRegex.test(password)) {
+    criteriaMatch++;
+  }
+
+  if (smallLettersRegex.test(password)) {
+    criteriaMatch++;
+  }
+
+  if (numberRegex.test(password)) {
+    criteriaMatch++;
+  }
+
+  if (specialCharacterRegex.test(password)) {
+    criteriaMatch++;
+  }
+
+  return score[criteriaMatch];
 }
