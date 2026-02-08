@@ -29,5 +29,24 @@
  * @returns {number} Shipping cost, 0 for free shipping, or -1 for invalid input
  */
 export function calculateShipping(weight, country, orderTotal) {
-  // Your code here
+  const US = "US";
+
+  if (weight <= 0 || orderTotal < 0) {
+    return -1;
+  }
+
+  if (
+    (orderTotal > 50 && country === US) ||
+    (orderTotal > 100 && country !== US)
+  ) {
+    return 0;
+  }
+
+  if (weight <= 1) {
+    return country === US ? 5 : 15;
+  } else if (weight > 1 && weight <= 5) {
+    return country === US ? 10 : 25;
+  } else {
+    return country === US ? 15 : 40;
+  }
 }
